@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">WordContainer</string>
+
+    <!--Word search strings-->
+    <string name="search_hint">Search for a word</string>
+    <string name="search_or">or</string>
+    <string name="search_favorites">Show favorites</string>
 </resources>
