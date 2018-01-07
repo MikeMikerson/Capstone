@@ -4,10 +4,14 @@ import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
+
+import com.mike.word.container.wordcontainer.BuildConfig;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Scanner;
 
@@ -22,11 +26,32 @@ public final class NetworkUtilities {
     private static final String SEARCH_URL = BASE_URL + "search/en?";
 
     // Place the API_ID and API_KEY here
-    private static final String API_ID = "";
-    private static final String API_KEY = "";
+    private static final String APP_ID = BuildConfig.APP_ID;
+    private static final String APP_KEY = BuildConfig.APP_KEY;
+
+    // Query parameters
+    private static final String API_QUERRY = "q";
+
+    public static URL getSearchResults(String searchWord) {
+        Uri builtUri = Uri.parse(SEARCH_URL).buildUpon()
+                .appendQueryParameter(API_QUERRY, searchWord)
+                .build();
+
+        URL url = null;
+        try {
+            url = new URL(builtUri.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        return url;
+    }
 
     public static String getHttpResponse(URL url) throws IOException {
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestProperty("Accept", "application/json");
+        connection.setRequestProperty("app_id", APP_ID);
+        connection.setRequestProperty("app_key", APP_KEY);
 
         try {
             InputStream inputStream = connection.getInputStream();

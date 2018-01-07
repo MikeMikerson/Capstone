@@ -9,6 +9,13 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        // Oxford Dictionaries API
+        buildConfigField("String", "APP_ID", APP_ID)
+        buildConfigField("String", "APP_KEY", APP_KEY)
+
+        // Google Services
+        buildConfigField("String", "TRACKING_ID", TRACKING_ID)
     }
     buildTypes {
         release {
