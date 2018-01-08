@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.SearchResultsActiivty"
+            android:name=".ui.SearchResultsActivity"
             android:parentActivityName=".ui.MainActivity">
 
         </activity>

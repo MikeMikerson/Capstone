@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
             if (data == null) return;
 
             Log.i("onPostExecute", data);
-            Intent intent = new Intent(MainActivity.this, SearchResultsActiivty.class);
+            Intent intent = new Intent(MainActivity.this, SearchResultsActivity.class);
             intent.putExtra(ConstantUtilities.WORD_LIST, data);
             startActivity(intent);
         }

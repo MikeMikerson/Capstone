@@ -15,7 +15,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SearchResultsActiivty extends AppCompatActivity {
+public class SearchResultsActivity extends AppCompatActivity {
     @BindView(R.id.search_results_recycler_view) RecyclerView recyclerView;
 
     private WordSearchAdapter adapter;
