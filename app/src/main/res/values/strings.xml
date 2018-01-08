@@ -5,4 +5,5 @@
     <string name="search_hint">Search for a word</string>
     <string name="search_or">or</string>
     <string name="search_favorites">Show favorites</string>
+    <string name="title_activity_search_results_actiivty">SearchResultsActiivty</string>
 </resources>

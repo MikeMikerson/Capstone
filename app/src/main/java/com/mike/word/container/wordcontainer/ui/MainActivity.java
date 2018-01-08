@@ -1,5 +1,6 @@
 package com.mike.word.container.wordcontainer.ui;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.mike.word.container.wordcontainer.R;
+import com.mike.word.container.wordcontainer.utilities.ConstantUtilities;
 import com.mike.word.container.wordcontainer.utilities.NetworkUtilities;
 
 import java.net.URL;
@@ -57,6 +59,9 @@ public class MainActivity extends AppCompatActivity {
             if (data == null) return;
 
             Log.i("onPostExecute", data);
+            Intent intent = new Intent(MainActivity.this, SearchResultsActiivty.class);
+            intent.putExtra(ConstantUtilities.WORD_LIST, data);
+            startActivity(intent);
         }
 
         @Override
