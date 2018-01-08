@@ -25,6 +25,11 @@
         <activity
             android:name=".ui.WordDetailsActivity"
             android:parentActivityName=".ui.SearchResultsActivity" />
+
+        <provider
+            android:authorities="com.mike.word.container.wordcontainer"
+            android:name=".data.WordProvider"
+            android:exported="false" />
     </application>
 
 </manifest>
