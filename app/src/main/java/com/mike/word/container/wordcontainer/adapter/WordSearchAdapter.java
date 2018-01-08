@@ -30,7 +30,7 @@ public class WordSearchAdapter extends RecyclerView.Adapter<WordSearchAdapter.Vi
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.word) TextView word;
+        @BindView(R.id.word) TextView wordView;
         public ViewHolder(View view) {
             super(view);
 
@@ -57,7 +57,9 @@ public class WordSearchAdapter extends RecyclerView.Adapter<WordSearchAdapter.Vi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        String word = wordList.get(position).getWord();
 
+        holder.wordView.setText(word);
     }
 
     public void updateWordList(List<Word> wordList) {

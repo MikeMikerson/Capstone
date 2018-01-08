@@ -12,10 +12,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.mike.word.container.wordcontainer.R;
+import com.mike.word.container.wordcontainer.models.Word;
 import com.mike.word.container.wordcontainer.utilities.ConstantUtilities;
 import com.mike.word.container.wordcontainer.utilities.NetworkUtilities;
+import com.mike.word.container.wordcontainer.utilities.WordJsonUtilities;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -53,27 +57,35 @@ public class MainActivity extends AppCompatActivity {
         return searchWord.getText().toString();
     }
 
-    private class WordAsyncTask extends AsyncTask<String, Void, String> {
+    private class WordAsyncTask extends AsyncTask<String, Void, List<Word>> {
         @Override
-        protected void onPostExecute(String data) {
-            if (data == null) return;
+        protected void onPostExecute(List<Word> wordList) {
+            if (wordList == null) return;
 
-            Log.i("onPostExecute", data);
+            // In order to put as parcelable ArrayList, create a new ArrayList
+            // and add all the List of words to it
+            ArrayList<Word> arrayWordList = new ArrayList<>();
+            arrayWordList.addAll(wordList);
+
+            Bundle bundle = new Bundle();
+            bundle.putParcelableArrayList(ConstantUtilities.WORD_LIST, arrayWordList);
+
             Intent intent = new Intent(MainActivity.this, SearchResultsActivity.class);
-            intent.putExtra(ConstantUtilities.WORD_LIST, data);
+            intent.putExtras(bundle);
             startActivity(intent);
         }
 
         @Override
-        protected String doInBackground(String... word) {
+        protected List<Word> doInBackground(String... word) {
             if (word.length < 1 || word[0] == null || word[0].length() < 1) return null;
             URL searchUrl = NetworkUtilities.getSearchResults(word[0]);
 
             try {
-                String searchResponse = NetworkUtilities.getHttpResponse(searchUrl);
+                String jsonResponse = NetworkUtilities.getHttpResponse(searchUrl);
+                List<Word> wordList;
+                wordList = WordJsonUtilities.getWordStringsFromJson(jsonResponse);
 
-                // TODO: Convert to list of Words
-                return searchResponse;
+                return wordList;
             } catch (Exception e) {
                 e.printStackTrace();
                 return null;

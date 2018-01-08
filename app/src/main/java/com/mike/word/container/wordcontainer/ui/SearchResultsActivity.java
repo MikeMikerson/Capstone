@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import com.mike.word.container.wordcontainer.R;
 import com.mike.word.container.wordcontainer.adapter.WordSearchAdapter;
 import com.mike.word.container.wordcontainer.models.Word;
+import com.mike.word.container.wordcontainer.utilities.ConstantUtilities;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +39,11 @@ public class SearchResultsActivity extends AppCompatActivity {
     }
 
     private void getIntentExtras() {
-        wordList = new ArrayList<>();
+        Bundle bundle = getIntent().getExtras();
+
+        if (bundle != null) {
+            wordList = bundle.getParcelableArrayList(ConstantUtilities.WORD_LIST);
+        }
     }
 
     private void setViewLayoutManager() {

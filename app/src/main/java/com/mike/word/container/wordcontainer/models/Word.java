@@ -15,7 +15,12 @@ public class Word implements Parcelable {
 
     public Word() {}
 
-    private Word(Parcel in) {}
+    private Word(Parcel in) {
+        id = in.readString();
+        matchType= in.readString();
+        region = in.readString();
+        word = in.readString();
+    }
 
     public String getId() {
         return id;
@@ -56,7 +61,10 @@ public class Word implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-
+        parcel.writeString(id);
+        parcel.writeString(matchType);
+        parcel.writeString(region);
+        parcel.writeString(word);
     }
 
     public static final Parcelable.Creator<Word> CREATOR = new Parcelable.Creator<Word>() {
