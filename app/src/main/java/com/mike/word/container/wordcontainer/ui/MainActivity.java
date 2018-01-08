@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.mike.word.container.wordcontainer.R;
+import com.mike.word.container.wordcontainer.data.WordDBHelper;
 import com.mike.word.container.wordcontainer.models.Word;
 import com.mike.word.container.wordcontainer.utilities.ConstantUtilities;
 import com.mike.word.container.wordcontainer.utilities.NetworkUtilities;
@@ -32,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Uncomment the following line to delete DB if something goes wrong
+        deleteDatabase();
 
         ButterKnife.bind(this);
 
@@ -55,6 +59,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         return searchWord.getText().toString();
+    }
+
+    private void deleteDatabase() {
+        getApplicationContext().deleteDatabase(WordDBHelper.DATABASE_NAME);
     }
 
     private class WordAsyncTask extends AsyncTask<String, Void, List<Word>> {
