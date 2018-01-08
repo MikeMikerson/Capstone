@@ -1,5 +1,6 @@
 package com.mike.word.container.wordcontainer.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -7,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.mike.word.container.wordcontainer.R;
 import com.mike.word.container.wordcontainer.adapter.WordSearchAdapter;
+import com.mike.word.container.wordcontainer.listeners.OnWordClickListener;
 import com.mike.word.container.wordcontainer.models.Word;
 import com.mike.word.container.wordcontainer.utilities.ConstantUtilities;
 
@@ -55,7 +57,16 @@ public class SearchResultsActivity extends AppCompatActivity {
         recyclerView.setItemViewCacheSize(CACHE_SIZE);
         recyclerView.setDrawingCacheEnabled(true);
 
-        adapter = new WordSearchAdapter(this, wordList);
+        adapter = new WordSearchAdapter(this, wordList, new OnWordClickListener() {
+            @Override
+            public void onWordClick(Word word) {
+                Intent intent = new Intent(
+                        SearchResultsActivity.this, WordDetailsActivity.class);
+                intent.putExtra(ConstantUtilities.WORD_ID, word.getId());
+
+                startActivity(intent);
+            }
+        });
         recyclerView.setAdapter(adapter);
     }
 }

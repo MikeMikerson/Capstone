@@ -21,9 +21,8 @@
         </activity>
         <activity
             android:name=".ui.SearchResultsActivity"
-            android:parentActivityName=".ui.MainActivity">
-
-        </activity>
+            android:parentActivityName=".ui.MainActivity"></activity>
+        <activity android:name=".ui.WordDetailsActivity"></activity>
     </application>
 
 </manifest>
