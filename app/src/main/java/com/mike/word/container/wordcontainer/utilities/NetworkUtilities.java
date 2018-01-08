@@ -23,7 +23,10 @@ public final class NetworkUtilities {
     private static final String TAG = NetworkUtilities.class.getSimpleName();
 
     private static final String BASE_URL = "https://od-api.oxforddictionaries.com/api/v1/";
-    private static final String SEARCH_URL = BASE_URL + "search/en?";
+    private static final String BASE_DETAILS_URL
+            = "https://od-api.oxforddictionaries.com/api/v1/";
+    private static final String SEARCH_URL = BASE_URL + "search/en?prefix=true&";
+    private static final String DETAILS_URL = BASE_DETAILS_URL + "entries/en/";
 
     // Place the API_ID and API_KEY here
     private static final String APP_ID = BuildConfig.APP_ID;
@@ -32,12 +35,26 @@ public final class NetworkUtilities {
     // Query parameters
     private static final String API_QUERRY = "q";
     private static final String API_LIMIT = "limit";
-    private static final String LIMIT = "50";
+    private static final String LIMIT = "5";
 
     public static URL getSearchResults(String searchWord) {
         Uri builtUri = Uri.parse(SEARCH_URL).buildUpon()
                 .appendQueryParameter(API_QUERRY, searchWord)
                 .appendQueryParameter(API_LIMIT, LIMIT)
+                .build();
+
+        URL url = null;
+        try {
+            url = new URL(builtUri.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        return url;
+    }
+
+    public static URL getWordDetails(String wordId) {
+        Uri builtUri = Uri.parse(DETAILS_URL + wordId).buildUpon()
                 .build();
 
         URL url = null;

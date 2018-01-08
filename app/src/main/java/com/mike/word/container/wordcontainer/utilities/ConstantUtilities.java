@@ -8,5 +8,7 @@ public final class ConstantUtilities {
     // Activities intent
     public static final String WORD_LIST = "word_list";
     public static final String WORD_ID = "word_id";
+    public static final String SEARCH_WORD = "word";
+    public static final String WORD_REGION = "word_region";
 
 }

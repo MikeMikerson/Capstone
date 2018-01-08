@@ -3,6 +3,8 @@ package com.mike.word.container.wordcontainer.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.List;
+
 /**
  * Created by mike on 18/01/08.
  */
@@ -12,6 +14,10 @@ public class Word implements Parcelable {
     private String matchType;
     private String region;
     private String word;
+
+    // Details
+    private String definition;
+    private List<String> exampleList;
 
     public Word() {}
 
@@ -52,6 +58,22 @@ public class Word implements Parcelable {
 
     public void setWord(String word) {
         this.word = word;
+    }
+
+    public String getDefinition() {
+        return definition;
+    }
+
+    public void setDefinition(String definition) {
+        this.definition = definition;
+    }
+
+    public List<String> getExampleList() {
+        return exampleList;
+    }
+
+    public void setExampleList(List<String> exampleList) {
+        this.exampleList = exampleList;
     }
 
     @Override

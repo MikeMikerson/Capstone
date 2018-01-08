@@ -63,6 +63,8 @@ public class SearchResultsActivity extends AppCompatActivity {
                 Intent intent = new Intent(
                         SearchResultsActivity.this, WordDetailsActivity.class);
                 intent.putExtra(ConstantUtilities.WORD_ID, word.getId());
+                intent.putExtra(ConstantUtilities.SEARCH_WORD, word.getWord());
+                intent.putExtra(ConstantUtilities.WORD_REGION, word.getRegion());
 
                 startActivity(intent);
             }

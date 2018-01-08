@@ -20,6 +20,14 @@ public final class WordJsonUtilities {
     private static final String WORD = "word";
 
     private static final String RESULTS = "results";
+    private static final String LEXICAL_ENTRIES = "lexicalEntries";
+    private static final String ENTRIES = "entries";
+    private static final String SENSES = "senses";
+    private static final String DEFINITIONS = "definitions";
+    private static final String EXAMPLES = "examples";
+    private static final String TEXT = "text";
+
+    private static final int FIRST_POSITION = 0;
 
     public static List<Word> getWordStringsFromJson(String jsonStr) throws JSONException {
         List<Word> parsedData = new ArrayList<>();
@@ -44,5 +52,50 @@ public final class WordJsonUtilities {
         }
 
         return parsedData;
+    }
+
+    public static Word getWordDetails(String jsonStr) throws JSONException{
+        Word word = new Word();
+        JSONObject wordJson = new JSONObject(jsonStr);
+        JSONArray wordArray = wordJson.getJSONArray(RESULTS);
+
+        for (int i = 0; i < 1; i++) {
+            JSONObject lexicalEntries = wordArray.getJSONObject(i);
+            JSONArray lexicalArray = lexicalEntries.getJSONArray(LEXICAL_ENTRIES);
+
+            for (int j = 0; j < 1; j++) {
+                JSONObject entries = lexicalArray.getJSONObject(j);
+                JSONArray entriesArray = entries.getJSONArray(ENTRIES);
+
+                for (int k = 0; k < 1; k++) {
+                    JSONObject senses = entriesArray.getJSONObject(k);
+                    JSONArray sensesArray = senses.getJSONArray(SENSES);
+
+                    for (int l = 0; l < 1; l++) {
+                        JSONObject definitions = sensesArray.getJSONObject(l);
+                        JSONArray definitionsArray = definitions.getJSONArray(DEFINITIONS);
+
+                        // Use optJSONArray because there might not be any examples
+                        JSONArray examplesArray = definitions.optJSONArray(EXAMPLES);
+                        List<String> tempExampleList = new ArrayList<>();
+
+                        if (examplesArray != null) {
+                            for (int m = 0; m < examplesArray.length(); m++) {
+                                JSONObject examples = examplesArray.getJSONObject(m);
+                                String example = examples.getString(TEXT);
+
+                                tempExampleList.add(example);
+                            }
+                            word.setExampleList(tempExampleList);
+                        }
+
+                        word.setDefinition(definitionsArray.getString(FIRST_POSITION));
+                    }
+                }
+
+            }
+        }
+
+        return word;
     }
 }
