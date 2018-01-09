@@ -63,6 +63,8 @@ public final class WordJsonUtilities {
             JSONObject lexicalEntries = wordArray.getJSONObject(i);
             JSONArray lexicalArray = lexicalEntries.getJSONArray(LEXICAL_ENTRIES);
 
+            word.setId(lexicalEntries.getString(ID));
+
             for (int j = 0; j < 1; j++) {
                 JSONObject entries = lexicalArray.getJSONObject(j);
                 JSONArray entriesArray = entries.getJSONArray(ENTRIES);
