@@ -1,5 +1,7 @@
 package com.mike.word.container.wordcontainer.ui;
 
+import android.content.ContentValues;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -7,8 +9,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mike.word.container.wordcontainer.R;
+import com.mike.word.container.wordcontainer.data.WordContract.WordEntry;
+import com.mike.word.container.wordcontainer.data.WordProvider;
 import com.mike.word.container.wordcontainer.listeners.OnFabTouchListener;
 import com.mike.word.container.wordcontainer.models.Word;
 import com.mike.word.container.wordcontainer.utilities.ConstantUtilities;
@@ -29,6 +34,7 @@ public class WordDetailsActivity extends AppCompatActivity {
     private String wordId;
     private String selectedWord;
     private String wordRegion;
+    private Toast toast;
 
     private final int FIRST_ELEMENT = 0;
 
@@ -58,16 +64,49 @@ public class WordDetailsActivity extends AppCompatActivity {
         WordDetailsAsyncTask task = new WordDetailsAsyncTask(new OnFabTouchListener() {
             @Override
             public void onTouch(Word word) {
-                Log.i("wordId", word.getId());
-                Log.i("word", selectedWord);
-                Log.i("definition", word.getDefinition());
-
-                if (word.getExampleList() != null && word.getExampleList().size() > 0) {
-                    Log.i("example", word.getExampleList().get(FIRST_ELEMENT));
-                }
+                saveWordAsFavorite(word);
             }
         });
         task.execute(wordId);
+    }
+
+    private void saveWordAsFavorite(Word word) {
+        ContentValues values = new ContentValues();
+
+        values.put(WordEntry.COLUMN_WORD_ID, word.getId());
+        values.put(WordEntry.COLUMN_WORD, selectedWord);
+        values.put(WordEntry.COLUMN_DEFINITION, word.getDefinition());
+
+        if (word.getExampleList() != null && word.getExampleList().size() > 0) {
+            values.put(WordEntry.COLUMN_EXAMPLE_LIST, word.getExampleList().get(FIRST_ELEMENT));
+        }
+
+        Uri newUri = null;
+        if (WordProvider.hasWord(getBaseContext(), word.getId()) == 0) {
+            newUri = getContentResolver().insert(WordEntry.CONTENT_URI, values);
+        }
+
+        if (newUri == null) {
+            showToast(getString(R.string.already_favorite));
+        } else {
+            showToast(getString(R.string.save_successful));
+        }
+    }
+
+    public void showToast(String message) {
+        if (toast == null) {
+            toast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
+            toast.show();
+        }
+
+        if (toast.getView().isShown()) {
+            toast.cancel();
+            toast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
+            toast.show();
+        } else {
+            toast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
+            toast.show();
+        }
     }
 
     private class WordDetailsAsyncTask extends AsyncTask<String, Void, Word> {

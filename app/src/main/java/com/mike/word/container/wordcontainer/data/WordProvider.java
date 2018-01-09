@@ -161,7 +161,7 @@ public class WordProvider extends ContentProvider {
     }
 
     // Checks if there is currently anything in the database. Returns 0 if no data
-    public static int hasWord(Context context, int wordId) {
+    public static int hasWord(Context context, String wordId) {
         Cursor cursor = null;
         WordDBHelper dbHelper = new WordDBHelper(context);
         SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -169,7 +169,7 @@ public class WordProvider extends ContentProvider {
         try {
             String query = "SELECT count(*) FROM " + WordEntry.TABLE_NAME
                     + " WHERE " + WordEntry.COLUMN_WORD_ID + " = ?";
-            cursor = db.rawQuery(query, new String[] {Integer.toString(wordId)});
+            cursor = db.rawQuery(query, new String[] {wordId});
             if (cursor.moveToFirst()) {
                 return cursor.getInt(0);
             }
