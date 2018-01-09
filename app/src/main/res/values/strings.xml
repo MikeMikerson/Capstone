@@ -8,6 +8,7 @@
     <string name="title_activity_search_results_actiivty">SearchResultsActiivty</string>
 
     <!--Database-->
+    <string name="no_favorites_available">You haven\'t added any words to your favorites list yet</string>
     <string name="failed_to_save">Failed to save</string>
     <string name="already_favorite">This word is a favorite already</string>
     <string name="save_successful">Saved as favorite</string>

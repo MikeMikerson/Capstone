@@ -21,6 +21,12 @@ public class Word implements Parcelable {
 
     public Word() {}
 
+    public Word(String id, String word, String definition) {
+        this.id = id;
+        this.word = word;
+        this.definition = definition;
+    }
+
     private Word(Parcel in) {
         id = in.readString();
         matchType= in.readString();

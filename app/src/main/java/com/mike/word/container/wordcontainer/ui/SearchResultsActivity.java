@@ -25,6 +25,8 @@ public class SearchResultsActivity extends AppCompatActivity {
     private LinearLayoutManager layoutManager;
     private List<Word> wordList;
 
+    private boolean isFavorite = false;
+
     private static final int CACHE_SIZE = 20;
 
     @Override
@@ -42,9 +44,13 @@ public class SearchResultsActivity extends AppCompatActivity {
 
     private void getIntentExtras() {
         Bundle bundle = getIntent().getExtras();
-
         if (bundle != null) {
-            wordList = bundle.getParcelableArrayList(ConstantUtilities.WORD_LIST);
+            if (getIntent().hasExtra(ConstantUtilities.WORD_LIST)) {
+                wordList = bundle.getParcelableArrayList(ConstantUtilities.WORD_LIST);
+            } else {
+                wordList = bundle.getParcelableArrayList(ConstantUtilities.WORD_LIST_FAVORITE);
+                isFavorite = true;
+            }
         }
     }
 
@@ -64,11 +70,28 @@ public class SearchResultsActivity extends AppCompatActivity {
                         SearchResultsActivity.this, WordDetailsActivity.class);
                 intent.putExtra(ConstantUtilities.WORD_ID, word.getId());
                 intent.putExtra(ConstantUtilities.SEARCH_WORD, word.getWord());
-                intent.putExtra(ConstantUtilities.WORD_REGION, word.getRegion());
+//                intent.putExtra(ConstantUtilities.WORD_REGION, word.getRegion());
+                if (isFavorite) {
+                    ArrayList<Word> arrayList = new ArrayList<>();
+                    arrayList.addAll(wordList);
+
+                    intent.putExtra(ConstantUtilities.WORD_FAVORITE, word);
+                    intent.putExtra(ConstantUtilities.IS_FAVORITE, isFavorite);
+                }
 
                 startActivity(intent);
             }
         });
         recyclerView.setAdapter(adapter);
     }
+
+//    ArrayList<Word> arrayWordList = new ArrayList<>();
+//        arrayWordList.addAll(convertCursorToMovie(data));
+//
+//    Bundle bundle = new Bundle();
+//    bundle.putParcelableArrayList(ConstantUtilities.WORD_LIST_FAVORITE, arrayWordList);
+//
+//    Intent intent = new Intent(MainActivity.this, SearchResultsActivity.class);
+//        intent.putExtras(bundle);
+//    startActivity(intent);
 }

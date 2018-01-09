@@ -21,6 +21,8 @@ import com.mike.word.container.wordcontainer.utilities.NetworkUtilities;
 import com.mike.word.container.wordcontainer.utilities.WordJsonUtilities;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,8 +35,10 @@ public class WordDetailsActivity extends AppCompatActivity {
 
     private String wordId;
     private String selectedWord;
-    private String wordRegion;
+//    private String wordRegion;
+    private boolean isFavorite = false;
     private Toast toast;
+    private Word favoriteWord;
 
     private final int FIRST_ELEMENT = 0;
 
@@ -47,13 +51,23 @@ public class WordDetailsActivity extends AppCompatActivity {
 
         getWordIdFromIntentExtras();
         setSelectedWord();
-        executeAsyncTask(wordId);
+
+        if (!isFavorite) {
+            executeAsyncTask(wordId);
+        } else {
+            displayFavorite();
+        }
     }
 
     private void getWordIdFromIntentExtras() {
         wordId = getIntent().getStringExtra(ConstantUtilities.WORD_ID);
         selectedWord = getIntent().getStringExtra(ConstantUtilities.SEARCH_WORD);
-        wordRegion = getIntent().getStringExtra(ConstantUtilities.WORD_REGION);
+
+        if (getIntent().hasExtra(ConstantUtilities.IS_FAVORITE)) {
+            isFavorite = true;
+            favoriteWord = getIntent().getParcelableExtra(ConstantUtilities.WORD_FAVORITE);
+        }
+//        wordRegion = getIntent().getStringExtra(ConstantUtilities.WORD_REGION);
     }
 
     private void setSelectedWord() {
@@ -68,6 +82,13 @@ public class WordDetailsActivity extends AppCompatActivity {
             }
         });
         task.execute(wordId);
+    }
+
+    private void displayFavorite() {
+        definitionView.setText(favoriteWord.getDefinition());
+        if (favoriteWord.getExampleList() != null && favoriteWord.getExampleList().size() > 0) {
+            exampleView.setText(favoriteWord.getExampleList().get(FIRST_ELEMENT));
+        }
     }
 
     private void saveWordAsFavorite(Word word) {
