@@ -12,4 +12,7 @@
     <string name="failed_to_save">Failed to save</string>
     <string name="already_favorite">This word is a favorite already</string>
     <string name="save_successful">Saved as favorite</string>
+
+    <!--AdMob test id-->
+    <string name="test_ads">ca-app-pub-3940256099942544/6300978111</string>
 </resources>

@@ -17,6 +17,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.mike.word.container.wordcontainer.BuildConfig;
 import com.mike.word.container.wordcontainer.R;
 import com.mike.word.container.wordcontainer.data.WordContract.WordEntry;
 import com.mike.word.container.wordcontainer.data.WordDBHelper;
@@ -37,6 +42,7 @@ public class MainActivity extends AppCompatActivity
 
     @BindView(R.id.search_word) EditText searchWord;
     @BindView(R.id.display_favorites) Button getFavoritesButton;
+    @BindView(R.id.ad_view) AdView adView;
 
     private static final int ID_FAVORITE_WORD_LOADER = 500;
 
@@ -49,6 +55,8 @@ public class MainActivity extends AppCompatActivity
         deleteDatabase();
 
         ButterKnife.bind(this);
+
+        initializeAdMob();
 
         setEditTextListener();
         setFavoriteButtonListener();
@@ -89,6 +97,13 @@ public class MainActivity extends AppCompatActivity
 
     private void deleteDatabase() {
         getApplicationContext().deleteDatabase(WordDBHelper.DATABASE_NAME);
+    }
+
+    private void initializeAdMob() {
+        MobileAds.initialize(this, BuildConfig.ADMOB_APP_ID);
+
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
     }
 
     private class WordAsyncTask extends AsyncTask<String, Void, List<Word>> {

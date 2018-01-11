@@ -16,6 +16,8 @@ android {
 
         // Google Services
         buildConfigField("String", "TRACKING_ID", TRACKING_ID)
+        buildConfigField("String", "ADMOB_APP_ID", ADMOB_APP_ID)
+        resValue("string", "ADMOB_APP_ID", ADMOB_APP_ID)
     }
     buildTypes {
         release {
@@ -38,4 +40,7 @@ dependencies {
 
     compile 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+
+    // Google Services
+    compile 'com.google.android.gms:play-services-ads:11.8.0'
 }
