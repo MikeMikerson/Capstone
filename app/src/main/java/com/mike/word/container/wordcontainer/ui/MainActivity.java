@@ -21,8 +21,11 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.mike.word.container.wordcontainer.BuildConfig;
 import com.mike.word.container.wordcontainer.R;
+import com.mike.word.container.wordcontainer.analytics.AnalyticsApplication;
 import com.mike.word.container.wordcontainer.data.WordContract.WordEntry;
 import com.mike.word.container.wordcontainer.data.WordDBHelper;
 import com.mike.word.container.wordcontainer.models.Word;
@@ -40,11 +43,15 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity
         implements LoaderManager.LoaderCallbacks<Cursor>{
 
+    private static final String TAG = MainActivity.class.getSimpleName();
+
     @BindView(R.id.search_word) EditText searchWord;
     @BindView(R.id.display_favorites) Button getFavoritesButton;
     @BindView(R.id.ad_view) AdView adView;
 
     private static final int ID_FAVORITE_WORD_LOADER = 500;
+
+    private Tracker tracker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,9 +64,17 @@ public class MainActivity extends AppCompatActivity
         ButterKnife.bind(this);
 
         initializeAdMob();
+        initializeAnalytics();
 
         setEditTextListener();
         setFavoriteButtonListener();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        trackScreenName();
     }
 
     private void executeAsyncTask(String userWord) {
@@ -104,6 +119,18 @@ public class MainActivity extends AppCompatActivity
 
         AdRequest adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
+    }
+
+    private void initializeAnalytics() {
+        AnalyticsApplication application = (AnalyticsApplication) getApplication();
+
+        Log.i(TAG, "Setting screen name");
+        tracker = application.getDefaultTracker();
+    }
+
+    private void trackScreenName() {
+        tracker.setScreenName(TAG);
+        tracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 
     private class WordAsyncTask extends AsyncTask<String, Void, List<Word>> {

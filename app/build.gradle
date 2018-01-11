@@ -16,8 +16,9 @@ android {
 
         // Google Services
         buildConfigField("String", "TRACKING_ID", TRACKING_ID)
+        resValue("string", "tracking_id", TRACKING_ID)
         buildConfigField("String", "ADMOB_APP_ID", ADMOB_APP_ID)
-        resValue("string", "ADMOB_APP_ID", ADMOB_APP_ID)
+        resValue("string", "admob_app_id", ADMOB_APP_ID)
     }
     buildTypes {
         release {
@@ -43,4 +44,5 @@ dependencies {
 
     // Google Services
     compile 'com.google.android.gms:play-services-ads:11.8.0'
+    compile 'com.google.android.gms:play-services-analytics:11.8.0'
 }
