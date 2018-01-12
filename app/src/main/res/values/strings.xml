@@ -28,4 +28,7 @@
     <string name="dialogue_accept">OK</string>
     <string name="dialogue_cancel">Cancel</string>
     <string name="dialogue_widget_added">Word added to widget</string>
+
+    <!--Activity titles-->
+    <string name="details_title">Definition - %1$s</string>
 </resources>

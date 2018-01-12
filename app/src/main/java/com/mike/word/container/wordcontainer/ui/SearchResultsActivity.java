@@ -39,7 +39,7 @@ public class SearchResultsActivity extends AppCompatActivity {
 
         getIntentExtras();
 
-        if (searchWord != null) {
+        if (searchWord != null && getSupportActionBar() != null) {
             getSupportActionBar().setTitle(searchWord);
         }
 

@@ -59,7 +59,7 @@ public class WordDetailsActivity extends AppCompatActivity {
 
         getWordIdFromIntentExtras();
         setSelectedWord();
-
+        setTitle();
         if (!isFavorite) {
             executeAsyncTask(wordId);
         } else {
@@ -86,6 +86,16 @@ public class WordDetailsActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void setTitle() {
+        String title = String.format(
+                (getResources().getString(R.string.details_title)),
+                selectedWord);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(title);
+        }
     }
 
     private void displayAddWidgetDialogue() {
