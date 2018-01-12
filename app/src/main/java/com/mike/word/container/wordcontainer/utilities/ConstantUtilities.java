@@ -13,4 +13,8 @@ public final class ConstantUtilities {
     public static final String SEARCH_WORD = "word";
     public static final String WORD_REGION = "word_region";
     public static final String IS_FAVORITE = "is_favorite";
+
+    // SharedPreferences
+    public static final String SP_WORD = "sp_word";
+    public static final String SP_WORD_DEFINITION = "sp_definition";
 }

@@ -1,8 +1,10 @@
 package com.mike.word.container.wordcontainer.ui;
 
 import android.content.ContentValues;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,6 +21,7 @@ import com.mike.word.container.wordcontainer.models.Word;
 import com.mike.word.container.wordcontainer.utilities.ConstantUtilities;
 import com.mike.word.container.wordcontainer.utilities.NetworkUtilities;
 import com.mike.word.container.wordcontainer.utilities.WordJsonUtilities;
+import com.mike.word.container.wordcontainer.widget.WordWidget;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -79,6 +82,7 @@ public class WordDetailsActivity extends AppCompatActivity {
             @Override
             public void onTouch(Word word) {
                 saveWordAsFavorite(word);
+                saveWordToPreferences(word);
             }
         });
         task.execute(wordId);
@@ -114,7 +118,22 @@ public class WordDetailsActivity extends AppCompatActivity {
         }
     }
 
-    public void showToast(String message) {
+    // To use in home screen widget
+    private void saveWordToPreferences(Word word) {
+        if (word == null) return;
+
+        SharedPreferences preferences
+                = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
+        SharedPreferences.Editor editor = preferences.edit();
+
+        editor.putString(ConstantUtilities.SP_WORD, selectedWord);
+        editor.putString(ConstantUtilities.SP_WORD_DEFINITION, word.getDefinition());
+        editor.apply();
+
+        WordWidget.sendRefreshBroadcast(this);
+    }
+
+    private void showToast(String message) {
         if (toast == null) {
             toast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
             toast.show();
