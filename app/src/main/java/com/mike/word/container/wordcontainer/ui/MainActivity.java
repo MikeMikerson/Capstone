@@ -45,13 +45,14 @@ public class MainActivity extends AppCompatActivity
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
-    @BindView(R.id.search_word) EditText searchWord;
+    @BindView(R.id.search_word) EditText searchWordView;
     @BindView(R.id.display_favorites) Button getFavoritesButton;
     @BindView(R.id.ad_view) AdView adView;
 
     private static final int ID_FAVORITE_WORD_LOADER = 500;
 
     private Tracker tracker;
+    private String searchWord;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,17 +84,17 @@ public class MainActivity extends AppCompatActivity
     }
 
     private String setEditTextListener() {
-        searchWord.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        searchWordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
                 if (id == EditorInfo.IME_NULL && keyEvent.getAction() == KeyEvent.ACTION_DOWN) {
-                    String userWord = textView.getText().toString();
-                    executeAsyncTask(userWord);
+                    searchWord = textView.getText().toString();
+                    executeAsyncTask(searchWord);
                 }
                 return true;
             }
         });
-        return searchWord.getText().toString();
+        return searchWordView.getText().toString();
     }
 
     private void setFavoriteButtonListener() {
@@ -148,6 +149,7 @@ public class MainActivity extends AppCompatActivity
 
             Intent intent = new Intent(MainActivity.this, SearchResultsActivity.class);
             intent.putExtras(bundle);
+            intent.putExtra(ConstantUtilities.SEARCH_WORD, searchWord);
             startActivity(intent);
         }
 

@@ -24,6 +24,7 @@ public class SearchResultsActivity extends AppCompatActivity {
     private WordSearchAdapter adapter;
     private LinearLayoutManager layoutManager;
     private List<Word> wordList;
+    private String searchWord;
 
     private boolean isFavorite = false;
 
@@ -38,6 +39,10 @@ public class SearchResultsActivity extends AppCompatActivity {
 
         getIntentExtras();
 
+        if (searchWord != null) {
+            getSupportActionBar().setTitle(searchWord);
+        }
+
         setViewLayoutManager();
         setRecyclerViewOptions();
     }
@@ -47,6 +52,7 @@ public class SearchResultsActivity extends AppCompatActivity {
         if (bundle != null) {
             if (getIntent().hasExtra(ConstantUtilities.WORD_LIST)) {
                 wordList = bundle.getParcelableArrayList(ConstantUtilities.WORD_LIST);
+                searchWord = getIntent().getStringExtra(ConstantUtilities.SEARCH_WORD);
             } else {
                 wordList = bundle.getParcelableArrayList(ConstantUtilities.WORD_LIST_FAVORITE);
                 isFavorite = true;
