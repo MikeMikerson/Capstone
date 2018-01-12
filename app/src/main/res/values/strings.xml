@@ -16,4 +16,6 @@
     <!--AdMob test id-->
     <string name="test_ads">ca-app-pub-3940256099942544/6300978111</string>
     <string name="ga_trackingId" translatable="false">@string/tracking_id</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
 </resources>
