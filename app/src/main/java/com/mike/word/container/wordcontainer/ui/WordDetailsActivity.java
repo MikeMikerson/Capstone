@@ -1,14 +1,18 @@
 package com.mike.word.container.wordcontainer.ui;
 
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,6 +42,7 @@ public class WordDetailsActivity extends AppCompatActivity {
 
     private String wordId;
     private String selectedWord;
+    private String wordDefinition;
 //    private String wordRegion;
     private boolean isFavorite = false;
     private Toast toast;
@@ -62,6 +67,46 @@ public class WordDetailsActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.add_widget_button, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            case R.id.add_widget:
+                displayAddWidgetDialogue();
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void displayAddWidgetDialogue() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setTitle(getString(R.string.dialogue_title));
+        builder.setMessage(getString(R.string.diaglogue_message));
+
+        builder.setPositiveButton(getString(R.string.dialogue_accept), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                saveWordToPreferences();
+                Toast.makeText(WordDetailsActivity.this,
+                        getString(R.string.dialogue_widget_added), Toast.LENGTH_LONG).show();
+            }
+        });
+        builder.setNegativeButton(getString(R.string.dialogue_cancel), null);
+
+        builder.show();
+    }
+
     private void getWordIdFromIntentExtras() {
         wordId = getIntent().getStringExtra(ConstantUtilities.WORD_ID);
         selectedWord = getIntent().getStringExtra(ConstantUtilities.SEARCH_WORD);
@@ -82,7 +127,6 @@ public class WordDetailsActivity extends AppCompatActivity {
             @Override
             public void onTouch(Word word) {
                 saveWordAsFavorite(word);
-                saveWordToPreferences(word);
             }
         });
         task.execute(wordId);
@@ -119,15 +163,15 @@ public class WordDetailsActivity extends AppCompatActivity {
     }
 
     // To use in home screen widget
-    private void saveWordToPreferences(Word word) {
-        if (word == null) return;
+    private void saveWordToPreferences() {
+        if (selectedWord == null || wordDefinition == null) return;
 
         SharedPreferences preferences
                 = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
         SharedPreferences.Editor editor = preferences.edit();
 
         editor.putString(ConstantUtilities.SP_WORD, selectedWord);
-        editor.putString(ConstantUtilities.SP_WORD_DEFINITION, word.getDefinition());
+        editor.putString(ConstantUtilities.SP_WORD_DEFINITION, wordDefinition);
         editor.apply();
 
         WordWidget.sendRefreshBroadcast(this);
@@ -159,7 +203,9 @@ public class WordDetailsActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(final Word word) {
 
-            definitionView.setText(word.getDefinition());
+            wordDefinition = word.getDefinition();
+
+            definitionView.setText(wordDefinition);
             if (word.getExampleList() != null && word.getExampleList().size() > 0) {
                 exampleView.setText(word.getExampleList().get(FIRST_ELEMENT));
             }

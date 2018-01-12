@@ -21,4 +21,11 @@
 
     <!--Widget-->
     <string name="no_preferences">Click to open app to choose a word to display</string>
+
+    <!--Add widget dialogue-->
+    <string name="dialogue_title">Word Widget</string>
+    <string name="diaglogue_message">Set this word to be displayed on the widget</string>
+    <string name="dialogue_accept">OK</string>
+    <string name="dialogue_cancel">Cancel</string>
+    <string name="dialogue_widget_added">Word added to widget</string>
 </resources>
