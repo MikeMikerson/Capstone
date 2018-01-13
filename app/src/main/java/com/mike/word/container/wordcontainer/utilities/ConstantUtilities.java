@@ -18,4 +18,11 @@ public final class ConstantUtilities {
     public static final String SP_WORD = "sp_word";
     public static final String SP_WORD_DEFINITION = "sp_definition";
     public static final String EDIT_SEARCH_WORD = "edit_search_word";
+    public static final String DETAILS_ID = "details_id";
+    public static final String DETAILS_WORD = "details_word";
+    public static final String DETAILS_DEFINITION = "details_definition";
+    public static final String DETAILS_EXAMPLE = "details_example";
+    public static final String DETAILS_IS_FAVORITE = "details_is_favorite";
+    public static final String DETAILS_FAB_VISIBILITY = "details_fab_visibility";
+    public static final String DETAILS_MENU_VISIBILITY = "details_menu_visibility";
 }

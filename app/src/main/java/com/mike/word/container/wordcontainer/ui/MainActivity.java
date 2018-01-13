@@ -83,9 +83,9 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        outState.putString(ConstantUtilities.EDIT_SEARCH_WORD, searchWordView.getText().toString());
-
         super.onSaveInstanceState(outState);
+
+        outState.putString(ConstantUtilities.EDIT_SEARCH_WORD, searchWordView.getText().toString());
     }
 
     private void executeAsyncTask(String userWord) {

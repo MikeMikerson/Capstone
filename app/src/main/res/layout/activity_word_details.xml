@@ -1,62 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/word"
-        android:fontFamily="sans-serif-condensed"
-        android:transitionName="@string/list_to_details_transition"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:textSize="28sp"
-        android:textAllCaps="true"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/definition_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"
-        android:textSize="24sp"
-        android:text="@string/definition_title"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/definition"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:textSize="20sp"/>
+            <TextView
+                android:id="@+id/word"
+                android:fontFamily="sans-serif-condensed"
+                android:transitionName="@string/list_to_details_transition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:textSize="28sp"
+                android:textAllCaps="true"/>
 
-    <TextView
-        android:id="@+id/no_definition"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:visibility="gone"
-        android:text="@string/no_definition"
-        android:textSize="20sp"/>
+            <TextView
+                android:id="@+id/definition_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="16dp"
+                android:textSize="24sp"
+                android:text="@string/definition_title"/>
 
-    <TextView
-        android:id="@+id/example_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:textSize="24sp"
-        android:text="@string/example_title"/>
+            <TextView
+                android:id="@+id/definition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:textSize="20sp"/>
 
-    <TextView
-        android:id="@+id/example"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:textSize="20sp"/>
+            <TextView
+                android:id="@+id/no_definition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:visibility="gone"
+                android:text="@string/no_definition"
+                android:textSize="20sp"/>
 
+            <TextView
+                android:id="@+id/example_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:textSize="24sp"
+                android:text="@string/example_title"/>
+
+            <TextView
+                android:id="@+id/example"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:textSize="20sp"/>
+        </LinearLayout>
+    </ScrollView>
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -71,5 +81,4 @@
             android:src="@drawable/ic_add_black_24dp" />
 
     </FrameLayout>
-
-</LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

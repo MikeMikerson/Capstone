@@ -46,11 +46,13 @@ public class WordDetailsActivity extends AppCompatActivity {
     private String wordId;
     private String selectedWord;
     private String wordDefinition;
+    private String wordExample;
 //    private String wordRegion;
     private boolean isFavorite = false;
     private Toast toast;
     private Word favoriteWord;
     private MenuItem menuItem;
+    private boolean menuVisibility = true;
 
     private final int FIRST_ELEMENT = 0;
 
@@ -58,15 +60,27 @@ public class WordDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_word_details);
-
         ButterKnife.bind(this);
+
+        if (savedInstanceState != null) {
+            wordId = savedInstanceState.getString(ConstantUtilities.DETAILS_ID);
+            selectedWord = savedInstanceState.getString(ConstantUtilities.DETAILS_WORD);
+            wordExample = savedInstanceState.getString(ConstantUtilities.DETAILS_EXAMPLE);
+            wordDefinition = savedInstanceState.getString(ConstantUtilities.DETAILS_DEFINITION);
+            isFavorite = savedInstanceState.getBoolean(ConstantUtilities.DETAILS_IS_FAVORITE);
+            menuVisibility =
+                    savedInstanceState.getBoolean(ConstantUtilities.DETAILS_MENU_VISIBILITY);
+
+            setupView(savedInstanceState);
+        }
 
         getWordIdFromIntentExtras();
         setSelectedWord();
         setTitle();
-        if (!isFavorite) {
+
+        if (!isFavorite && savedInstanceState == null) {
             executeAsyncTask(wordId);
-        } else {
+        } else if (savedInstanceState == null) {
             displayFavorite();
         }
     }
@@ -76,6 +90,7 @@ public class WordDetailsActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.add_widget_button, menu);
 
         menuItem = menu.findItem(R.id.add_widget);
+        menuItem.setVisible(menuVisibility);
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -92,6 +107,25 @@ public class WordDetailsActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putString(ConstantUtilities.DETAILS_ID, wordId);
+        outState.putString(ConstantUtilities.DETAILS_WORD, selectedWord);
+        outState.putBoolean(ConstantUtilities.DETAILS_IS_FAVORITE, isFavorite);
+        outState.putInt(ConstantUtilities.DETAILS_FAB_VISIBILITY, fabView.getVisibility());
+        outState.putBoolean(ConstantUtilities.DETAILS_MENU_VISIBILITY, menuItem.isVisible());
+
+        if (wordDefinition != null) {
+            outState.putString(ConstantUtilities.DETAILS_DEFINITION, wordDefinition);
+        }
+
+        if (wordExample != null) {
+            outState.putString(ConstantUtilities.DETAILS_EXAMPLE, wordExample);
+        }
     }
 
     private void setTitle() {
@@ -131,7 +165,6 @@ public class WordDetailsActivity extends AppCompatActivity {
             isFavorite = true;
             favoriteWord = getIntent().getParcelableExtra(ConstantUtilities.WORD_FAVORITE);
         }
-//        wordRegion = getIntent().getStringExtra(ConstantUtilities.WORD_REGION);
     }
 
     private void setSelectedWord() {
@@ -160,7 +193,10 @@ public class WordDetailsActivity extends AppCompatActivity {
 
         values.put(WordEntry.COLUMN_WORD_ID, word.getId());
         values.put(WordEntry.COLUMN_WORD, selectedWord);
-        values.put(WordEntry.COLUMN_DEFINITION, word.getDefinition());
+
+        if (word.getDefinition() != null) {
+            values.put(WordEntry.COLUMN_DEFINITION, wordDefinition);
+        }
 
         if (word.getExampleList() != null && word.getExampleList().size() > 0) {
             values.put(WordEntry.COLUMN_EXAMPLE_LIST, word.getExampleList().get(FIRST_ELEMENT));
@@ -209,6 +245,26 @@ public class WordDetailsActivity extends AppCompatActivity {
         }
     }
 
+    private void setupView(Bundle savedInstanceState) {
+        if (wordDefinition != null ) {
+            definitionView.setText(wordDefinition);
+        } else {
+            definitionTitleView.setVisibility(View.GONE);
+            definitionView.setVisibility(View.GONE);
+            noDefinitionView.setVisibility(View.VISIBLE);
+            fabView.setVisibility(View.GONE);
+        }
+
+        // Only using one example - the first one - in this app.
+        if (wordExample != null) {
+            exampleView.setText(wordExample);
+        } else {
+            exampleTitleView.setVisibility(View.GONE);
+        }
+
+        fabView.setVisibility(savedInstanceState.getInt(ConstantUtilities.DETAILS_FAB_VISIBILITY));
+    }
+
     private class WordDetailsAsyncTask extends AsyncTask<String, Void, Word> {
         private OnFabTouchListener listener;
 
@@ -233,7 +289,8 @@ public class WordDetailsActivity extends AppCompatActivity {
 
             // Only using one example - the first one - in this app.
             if (word.getExampleList() != null && word.getExampleList().size() > 0) {
-                exampleView.setText(word.getExampleList().get(FIRST_ELEMENT));
+                wordExample = word.getExampleList().get(FIRST_ELEMENT);
+                exampleView.setText(wordExample);
             } else {
                 exampleTitleView.setVisibility(View.GONE);
             }
