@@ -39,4 +39,8 @@
     <string name="definition_title">Definition</string>
     <string name="example_title">Example</string>
     <string name="no_definition">There are no definitions for this word</string>
+
+    <!--Content descriptions-->
+    <string name="favorites_button">Display favorites</string>
+    <string name="add_to_favorites_fab">Add to favorites</string>
 </resources>
