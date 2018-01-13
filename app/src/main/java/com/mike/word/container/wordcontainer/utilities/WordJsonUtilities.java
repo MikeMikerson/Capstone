@@ -76,7 +76,7 @@ public final class WordJsonUtilities {
                     if (sensesArray != null) {
                         for (int l = 0; l < 1; l++) {
                             JSONObject definitions = sensesArray.getJSONObject(l);
-                            JSONArray definitionsArray = definitions.getJSONArray(DEFINITIONS);
+                            JSONArray definitionsArray = definitions.optJSONArray(DEFINITIONS);
 
                             // Use optJSONArray because there might not be any examples
                             JSONArray examplesArray = definitions.optJSONArray(EXAMPLES);
@@ -92,7 +92,9 @@ public final class WordJsonUtilities {
                                 word.setExampleList(tempExampleList);
                             }
 
-                            word.setDefinition(definitionsArray.getString(FIRST_POSITION));
+                            if (definitionsArray != null) {
+                                word.setDefinition(definitionsArray.getString(FIRST_POSITION));
+                            }
                         }
                     }
                 }
