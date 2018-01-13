@@ -58,11 +58,14 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
         // Uncomment the following line to delete DB if something goes wrong
         deleteDatabase();
 
-        ButterKnife.bind(this);
+        if (savedInstanceState != null) {
+            searchWord = savedInstanceState.getString(ConstantUtilities.EDIT_SEARCH_WORD);
+        }
 
         initializeAdMob();
         initializeAnalytics();
@@ -76,6 +79,13 @@ public class MainActivity extends AppCompatActivity
         super.onResume();
 
         trackScreenName();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putString(ConstantUtilities.EDIT_SEARCH_WORD, searchWordView.getText().toString());
+
+        super.onSaveInstanceState(outState);
     }
 
     private void executeAsyncTask(String userWord) {

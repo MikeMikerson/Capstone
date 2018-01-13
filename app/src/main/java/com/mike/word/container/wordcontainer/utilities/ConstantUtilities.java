@@ -17,4 +17,5 @@ public final class ConstantUtilities {
     // SharedPreferences
     public static final String SP_WORD = "sp_word";
     public static final String SP_WORD_DEFINITION = "sp_definition";
+    public static final String EDIT_SEARCH_WORD = "edit_search_word";
 }
