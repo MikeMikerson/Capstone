@@ -6,30 +6,56 @@
 
     <TextView
         android:id="@+id/word"
+        android:fontFamily="sans-serif-condensed"
         android:transitionName="@string/list_to_details_transition"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"/>
+        android:layout_margin="16dp"
+        android:textSize="28sp"
+        android:textAllCaps="true"/>
+
+    <TextView
+        android:id="@+id/definition_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:textSize="24sp"
+        android:text="@string/definition_title"/>
 
     <TextView
         android:id="@+id/definition"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"/>
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:id="@+id/no_definition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:visibility="gone"
+        android:text="@string/no_definition"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:id="@+id/example_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:textSize="24sp"
+        android:text="@string/example_title"/>
 
     <TextView
         android:id="@+id/example"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"/>
-
-    <TextView
-        android:id="@+id/no_definition"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_margin="8dp"
-        android:visibility="gone"
-        android:text="@string/no_definition"/>
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:textSize="20sp"/>
 
     <FrameLayout
         android:layout_width="match_parent"

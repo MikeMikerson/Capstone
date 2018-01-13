@@ -35,6 +35,8 @@
     <!--Transitions-->
     <string name="list_to_details_transition">list_to_details_transition</string>
 
-    <!--Data loading-->
+    <!--Details Activity-->
+    <string name="definition_title">Definition</string>
+    <string name="example_title">Example</string>
     <string name="no_definition">There are no definitions for this word</string>
 </resources>

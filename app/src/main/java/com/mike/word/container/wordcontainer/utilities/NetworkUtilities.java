@@ -35,7 +35,7 @@ public final class NetworkUtilities {
     // Query parameters
     private static final String API_QUERRY = "q";
     private static final String API_LIMIT = "limit";
-    private static final String LIMIT = "5";
+    private static final String LIMIT = "50";
 
     public static URL getSearchResults(String searchWord) {
         Uri builtUri = Uri.parse(SEARCH_URL).buildUpon()

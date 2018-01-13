@@ -38,6 +38,8 @@ public class WordDetailsActivity extends AppCompatActivity {
     @BindView(R.id.word) TextView wordView;
     @BindView(R.id.definition) TextView definitionView;
     @BindView(R.id.example) TextView exampleView;
+    @BindView(R.id.definition_title) TextView definitionTitleView;
+    @BindView(R.id.example_title) TextView exampleTitleView;
     @BindView(R.id.no_definition) TextView noDefinitionView;
     @BindView(R.id.add_to_favorites) FloatingActionButton fabView;
 
@@ -223,12 +225,16 @@ public class WordDetailsActivity extends AppCompatActivity {
                 definitionView.setText(wordDefinition);
             } else {
                 menuItem.setVisible(false);
+                definitionTitleView.setVisibility(View.GONE);
+                definitionView.setVisibility(View.GONE);
                 noDefinitionView.setVisibility(View.VISIBLE);
             }
 
             // Only using one example - the first one - in this app.
             if (word.getExampleList() != null && word.getExampleList().size() > 0) {
                 exampleView.setText(word.getExampleList().get(FIRST_ELEMENT));
+            } else {
+                exampleTitleView.setVisibility(View.GONE);
             }
 
             fabView.setOnClickListener(new View.OnClickListener() {

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
@@ -71,6 +72,11 @@ public class SearchResultsActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemViewCacheSize(CACHE_SIZE);
         recyclerView.setDrawingCacheEnabled(true);
+
+        DividerItemDecoration decoration = new DividerItemDecoration(
+                recyclerView.getContext(),
+                layoutManager.getOrientation());
+        recyclerView.addItemDecoration(decoration);
 
         adapter = new WordSearchAdapter(this, wordList, new OnWordClickListener() {
             @Override
