@@ -228,6 +228,7 @@ public class WordDetailsActivity extends AppCompatActivity {
                 definitionTitleView.setVisibility(View.GONE);
                 definitionView.setVisibility(View.GONE);
                 noDefinitionView.setVisibility(View.VISIBLE);
+                fabView.setVisibility(View.GONE);
             }
 
             // Only using one example - the first one - in this app.
@@ -237,12 +238,14 @@ public class WordDetailsActivity extends AppCompatActivity {
                 exampleTitleView.setVisibility(View.GONE);
             }
 
-            fabView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    listener.onTouch(word);
-                }
-            });
+            if (fabView.getVisibility() != View.GONE) {
+                fabView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        listener.onTouch(word);
+                    }
+                });
+            }
         }
 
         @Override
