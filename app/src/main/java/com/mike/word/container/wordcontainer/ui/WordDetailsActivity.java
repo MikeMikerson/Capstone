@@ -274,6 +274,15 @@ public class WordDetailsActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(final Word word) {
+            if (word == null) {
+                definitionTitleView.setVisibility(View.GONE);
+                definitionView.setVisibility(View.GONE);
+                noDefinitionView.setVisibility(View.VISIBLE);
+                fabView.setVisibility(View.GONE);
+                exampleTitleView.setVisibility(View.GONE);
+                menuItem.setVisible(false);
+                return;
+            }
 
             // Some words don't have any definitions
             if (word.getDefinition() != null ) {
