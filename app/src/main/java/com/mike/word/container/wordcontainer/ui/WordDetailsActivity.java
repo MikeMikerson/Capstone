@@ -38,6 +38,7 @@ public class WordDetailsActivity extends AppCompatActivity {
     @BindView(R.id.word) TextView wordView;
     @BindView(R.id.definition) TextView definitionView;
     @BindView(R.id.example) TextView exampleView;
+    @BindView(R.id.no_definition) TextView noDefinitionView;
     @BindView(R.id.add_to_favorites) FloatingActionButton fabView;
 
     private String wordId;
@@ -47,6 +48,7 @@ public class WordDetailsActivity extends AppCompatActivity {
     private boolean isFavorite = false;
     private Toast toast;
     private Word favoriteWord;
+    private MenuItem menuItem;
 
     private final int FIRST_ELEMENT = 0;
 
@@ -70,6 +72,8 @@ public class WordDetailsActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.add_widget_button, menu);
+
+        menuItem = menu.findItem(R.id.add_widget);
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -213,9 +217,16 @@ public class WordDetailsActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(final Word word) {
 
-            wordDefinition = word.getDefinition();
+            // Some words don't have any definitions
+            if (word.getDefinition() != null ) {
+                wordDefinition = word.getDefinition();
+                definitionView.setText(wordDefinition);
+            } else {
+                menuItem.setVisible(false);
+                noDefinitionView.setVisibility(View.VISIBLE);
+            }
 
-            definitionView.setText(wordDefinition);
+            // Only using one example - the first one - in this app.
             if (word.getExampleList() != null && word.getExampleList().size() > 0) {
                 exampleView.setText(word.getExampleList().get(FIRST_ELEMENT));
             }

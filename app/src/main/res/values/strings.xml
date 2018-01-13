@@ -34,4 +34,7 @@
 
     <!--Transitions-->
     <string name="list_to_details_transition">list_to_details_transition</string>
+
+    <!--Data loading-->
+    <string name="no_definition">There are no definitions for this word</string>
 </resources>

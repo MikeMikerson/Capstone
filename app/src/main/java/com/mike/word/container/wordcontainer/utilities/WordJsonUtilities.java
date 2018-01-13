@@ -71,27 +71,29 @@ public final class WordJsonUtilities {
 
                 for (int k = 0; k < 1; k++) {
                     JSONObject senses = entriesArray.getJSONObject(k);
-                    JSONArray sensesArray = senses.getJSONArray(SENSES);
+                    JSONArray sensesArray = senses.optJSONArray(SENSES);
 
-                    for (int l = 0; l < 1; l++) {
-                        JSONObject definitions = sensesArray.getJSONObject(l);
-                        JSONArray definitionsArray = definitions.getJSONArray(DEFINITIONS);
+                    if (sensesArray != null) {
+                        for (int l = 0; l < 1; l++) {
+                            JSONObject definitions = sensesArray.getJSONObject(l);
+                            JSONArray definitionsArray = definitions.getJSONArray(DEFINITIONS);
 
-                        // Use optJSONArray because there might not be any examples
-                        JSONArray examplesArray = definitions.optJSONArray(EXAMPLES);
-                        List<String> tempExampleList = new ArrayList<>();
+                            // Use optJSONArray because there might not be any examples
+                            JSONArray examplesArray = definitions.optJSONArray(EXAMPLES);
+                            List<String> tempExampleList = new ArrayList<>();
 
-                        if (examplesArray != null) {
-                            for (int m = 0; m < examplesArray.length(); m++) {
-                                JSONObject examples = examplesArray.getJSONObject(m);
-                                String example = examples.getString(TEXT);
+                            if (examplesArray != null) {
+                                for (int m = 0; m < examplesArray.length(); m++) {
+                                    JSONObject examples = examplesArray.getJSONObject(m);
+                                    String example = examples.getString(TEXT);
 
-                                tempExampleList.add(example);
+                                    tempExampleList.add(example);
+                                }
+                                word.setExampleList(tempExampleList);
                             }
-                            word.setExampleList(tempExampleList);
-                        }
 
-                        word.setDefinition(definitionsArray.getString(FIRST_POSITION));
+                            word.setDefinition(definitionsArray.getString(FIRST_POSITION));
+                        }
                     }
                 }
 
