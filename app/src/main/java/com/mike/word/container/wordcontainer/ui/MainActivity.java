@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity
         ButterKnife.bind(this);
 
         // Uncomment the following line to delete DB if something goes wrong
-        // deleteDatabase();
+        deleteDatabase();
 
         if (savedInstanceState != null) {
             searchWord = savedInstanceState.getString(ConstantUtilities.EDIT_SEARCH_WORD);
@@ -229,15 +229,15 @@ public class MainActivity extends AppCompatActivity
                 int cursorWordId = cursor.getColumnIndex(WordEntry.COLUMN_WORD_ID);
                 int cursorWord = cursor.getColumnIndex(WordEntry.COLUMN_WORD);
                 int cursorDefinition = cursor.getColumnIndex(WordEntry.COLUMN_DEFINITION);
-//                int cursorExample = cursor.getColumnIndex(WordEntry.COLUMN_EXAMPLE_LIST);
+                int cursorExample = cursor.getColumnIndex(WordEntry.COLUMN_EXAMPLE_LIST);
 
                 String wordId = cursor.getString(cursorWordId);
                 String word = cursor.getString(cursorWord);
                 String definition = cursor.getString(cursorDefinition);
-//                String example = cursor.getString(cursorExample);
+                String example = cursor.getString(cursorExample);
 
                 // TODO: Add example
-                wordList.add(new Word(wordId, word, definition));
+                wordList.add(new Word(wordId, word, definition, example));
             }
         } finally {
             cursor.close();

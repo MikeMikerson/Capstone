@@ -18,13 +18,15 @@ public class Word implements Parcelable {
     // Details
     private String definition;
     private List<String> exampleList;
+    private String example;
 
     public Word() {}
 
-    public Word(String id, String word, String definition) {
+    public Word(String id, String word, String definition, String example) {
         this.id = id;
         this.word = word;
         this.definition = definition;
+        this.example = example;
     }
 
     private Word(Parcel in) {
@@ -32,6 +34,8 @@ public class Word implements Parcelable {
         matchType= in.readString();
         region = in.readString();
         word = in.readString();
+        definition = in.readString();
+        example = in.readString();
     }
 
     public String getId() {
@@ -82,6 +86,14 @@ public class Word implements Parcelable {
         this.exampleList = exampleList;
     }
 
+    public String getExample() {
+        return example;
+    }
+
+    public void setExample(String example) {
+        this.example = example;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -93,6 +105,8 @@ public class Word implements Parcelable {
         parcel.writeString(matchType);
         parcel.writeString(region);
         parcel.writeString(word);
+        parcel.writeString(definition);
+        parcel.writeString(example);
     }
 
     public static final Parcelable.Creator<Word> CREATOR = new Parcelable.Creator<Word>() {

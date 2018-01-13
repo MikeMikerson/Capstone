@@ -183,8 +183,8 @@ public class WordDetailsActivity extends AppCompatActivity {
 
     private void displayFavorite() {
         definitionView.setText(favoriteWord.getDefinition());
-        if (favoriteWord.getExampleList() != null && favoriteWord.getExampleList().size() > 0) {
-            exampleView.setText(favoriteWord.getExampleList().get(FIRST_ELEMENT));
+        if (favoriteWord.getExample() != null) {
+            exampleView.setText(favoriteWord.getExample());
         }
     }
 
@@ -198,8 +198,8 @@ public class WordDetailsActivity extends AppCompatActivity {
             values.put(WordEntry.COLUMN_DEFINITION, wordDefinition);
         }
 
-        if (word.getExampleList() != null && word.getExampleList().size() > 0) {
-            values.put(WordEntry.COLUMN_EXAMPLE_LIST, word.getExampleList().get(FIRST_ELEMENT));
+        if (word.getExample() != null) {
+            values.put(WordEntry.COLUMN_EXAMPLE_LIST, word.getExample());
         }
 
         Uri newUri = null;
@@ -296,9 +296,8 @@ public class WordDetailsActivity extends AppCompatActivity {
                 fabView.setVisibility(View.GONE);
             }
 
-            // Only using one example - the first one - in this app.
-            if (word.getExampleList() != null && word.getExampleList().size() > 0) {
-                wordExample = word.getExampleList().get(FIRST_ELEMENT);
+            if (word.getExample() != null) {
+                wordExample = word.getExample();
                 exampleView.setText(wordExample);
             } else {
                 exampleTitleView.setVisibility(View.GONE);

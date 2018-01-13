@@ -87,9 +87,8 @@ public final class WordJsonUtilities {
                                     JSONObject examples = examplesArray.getJSONObject(m);
                                     String example = examples.getString(TEXT);
 
-                                    tempExampleList.add(example);
+                                    word.setExample(example);
                                 }
-                                word.setExampleList(tempExampleList);
                             }
 
                             if (definitionsArray != null) {
