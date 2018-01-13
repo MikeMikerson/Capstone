@@ -31,4 +31,7 @@
 
     <!--Activity titles-->
     <string name="details_title">Definition - %1$s</string>
+
+    <!--Transitions-->
+    <string name="list_to_details_transition">list_to_details_transition</string>
 </resources>

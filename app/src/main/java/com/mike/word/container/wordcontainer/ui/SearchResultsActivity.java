@@ -2,9 +2,12 @@ package com.mike.word.container.wordcontainer.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
+import android.view.View;
 
 import com.mike.word.container.wordcontainer.R;
 import com.mike.word.container.wordcontainer.adapter.WordSearchAdapter;
@@ -71,12 +74,19 @@ public class SearchResultsActivity extends AppCompatActivity {
 
         adapter = new WordSearchAdapter(this, wordList, new OnWordClickListener() {
             @Override
-            public void onWordClick(Word word) {
+            public void onWordClick(Word word, View wordView) {
                 Intent intent = new Intent(
                         SearchResultsActivity.this, WordDetailsActivity.class);
                 intent.putExtra(ConstantUtilities.WORD_ID, word.getId());
                 intent.putExtra(ConstantUtilities.SEARCH_WORD, word.getWord());
-//                intent.putExtra(ConstantUtilities.WORD_REGION, word.getRegion());
+
+                intent.putExtra(getString(R.string.list_to_details_transition), word.getWord());
+                ActivityOptionsCompat optionsCompat = ActivityOptionsCompat
+                        .makeSceneTransitionAnimation(
+                                SearchResultsActivity.this,
+                                wordView,
+                                getString(R.string.list_to_details_transition));
+
                 if (isFavorite) {
                     ArrayList<Word> arrayList = new ArrayList<>();
                     arrayList.addAll(wordList);
@@ -85,13 +95,23 @@ public class SearchResultsActivity extends AppCompatActivity {
                     intent.putExtra(ConstantUtilities.IS_FAVORITE, isFavorite);
                 }
 
-                startActivity(intent);
+                startActivity(intent, optionsCompat.toBundle());
             }
         });
         recyclerView.setAdapter(adapter);
     }
 
-//    ArrayList<Word> arrayWordList = new ArrayList<>();
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                supportFinishAfterTransition();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    //    ArrayList<Word> arrayWordList = new ArrayList<>();
 //        arrayWordList.addAll(convertCursorToMovie(data));
 //
 //    Bundle bundle = new Bundle();

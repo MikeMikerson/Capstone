@@ -46,7 +46,7 @@ public class WordSearchAdapter extends RecyclerView.Adapter<WordSearchAdapter.Vi
             wordItem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    listener.onWordClick(word);
+                    listener.onWordClick(word, wordView);
                 }
             });
         }

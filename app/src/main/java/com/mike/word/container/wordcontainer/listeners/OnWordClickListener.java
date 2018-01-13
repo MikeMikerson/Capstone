@@ -1,5 +1,7 @@
 package com.mike.word.container.wordcontainer.listeners;
 
+import android.view.View;
+
 import com.mike.word.container.wordcontainer.models.Word;
 
 /**
@@ -7,5 +9,5 @@ import com.mike.word.container.wordcontainer.models.Word;
  */
 
 public interface OnWordClickListener {
-    void onWordClick(Word word);
+    void onWordClick(Word word, View view);
 }
