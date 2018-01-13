@@ -12,7 +12,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/search_word_margin_bottom"
-        android:layout_margin="@dimen/fab_margin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,13 +31,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="@string/search_or" />
+        android:text="@string/search_or"
+        android:textSize="20sp"/>
 
     <Button
         android:id="@+id/display_favorites"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/search_margin_top"
+        android:padding="8dp"
+        android:background="@drawable/rounded_button"
         app:layout_constraintTop_toBottomOf="@id/search_or"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
