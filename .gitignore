@@ -18,7 +18,7 @@
 .classpath
 todo*
 
-/gradle.properties
+# /gradle.properties
 
 # Keystore files
 # Uncomment the following line if you do not want to check your keystore files in.
