@@ -238,7 +238,7 @@ public class MainActivity extends AppCompatActivity
             // TODO: Add example
             wordList.add(new Word(wordId, word, definition, example));
         }
-        
+
         return wordList;
     }
 }
