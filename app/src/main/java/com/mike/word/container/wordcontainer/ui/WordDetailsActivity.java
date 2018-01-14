@@ -186,6 +186,8 @@ public class WordDetailsActivity extends AppCompatActivity {
     }
 
     private void displayFavorite() {
+        wordDefinition = favoriteWord.getDefinition();
+
         definitionView.setText(favoriteWord.getDefinition());
         if (favoriteWord.getExample() != null) {
             exampleView.setText(favoriteWord.getExample());
