@@ -17,7 +17,6 @@ public class Word implements Parcelable {
 
     // Details
     private String definition;
-    private List<String> exampleList;
     private String example;
 
     public Word() {}
@@ -46,16 +45,8 @@ public class Word implements Parcelable {
         this.id = id;
     }
 
-    public String getMatchType() {
-        return matchType;
-    }
-
     public void setMatchType(String matchType) {
         this.matchType = matchType;
-    }
-
-    public String getRegion() {
-        return region;
     }
 
     public void setRegion(String region) {
@@ -76,14 +67,6 @@ public class Word implements Parcelable {
 
     public void setDefinition(String definition) {
         this.definition = definition;
-    }
-
-    public List<String> getExampleList() {
-        return exampleList;
-    }
-
-    public void setExampleList(List<String> exampleList) {
-        this.exampleList = exampleList;
     }
 
     public String getExample() {

@@ -11,7 +11,6 @@ public final class ConstantUtilities {
     public static final String WORD_FAVORITE = "word_list_favorite";
     public static final String WORD_ID = "word_id";
     public static final String SEARCH_WORD = "word";
-    public static final String WORD_REGION = "word_region";
     public static final String IS_FAVORITE = "is_favorite";
 
     // SharedPreferences

@@ -9,7 +9,6 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.RemoteViews;
-import android.widget.TextView;
 
 import com.mike.word.container.wordcontainer.R;
 import com.mike.word.container.wordcontainer.utilities.ConstantUtilities;
@@ -62,8 +61,6 @@ public class WordWidget extends AppWidgetProvider {
         if (action.equals(AppWidgetManager.ACTION_APPWIDGET_UPDATE)) {
             AppWidgetManager manager = AppWidgetManager.getInstance(context);
             ComponentName componentName = new ComponentName(context, this.getClass());
-//            manager.notifyAppWidgetViewDataChanged(
-//                    manager.getAppWidgetIds(componentName), R.layout.word_widget);
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.word_widget);
 
             if (word == null || definition == null) {
@@ -96,4 +93,3 @@ public class WordWidget extends AppWidgetProvider {
         definition = preferences.getString(ConstantUtilities.SP_WORD_DEFINITION, "");
     }
 }
-

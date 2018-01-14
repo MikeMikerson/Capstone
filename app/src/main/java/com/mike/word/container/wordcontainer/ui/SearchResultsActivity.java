@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.MenuItem;
 import android.view.View;
 
 import com.mike.word.container.wordcontainer.R;
@@ -106,24 +105,4 @@ public class SearchResultsActivity extends AppCompatActivity {
         });
         recyclerView.setAdapter(adapter);
     }
-
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        switch (item.getItemId()) {
-//            case android.R.id.home:
-//                supportFinishAfterTransition();
-//                return true;
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
-
-    //    ArrayList<Word> arrayWordList = new ArrayList<>();
-//        arrayWordList.addAll(convertCursorToMovie(data));
-//
-//    Bundle bundle = new Bundle();
-//    bundle.putParcelableArrayList(ConstantUtilities.WORD_LIST_FAVORITE, arrayWordList);
-//
-//    Intent intent = new Intent(MainActivity.this, SearchResultsActivity.class);
-//        intent.putExtras(bundle);
-//    startActivity(intent);
 }

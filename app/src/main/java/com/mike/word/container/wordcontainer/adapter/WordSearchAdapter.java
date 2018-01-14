@@ -12,7 +12,6 @@ import com.mike.word.container.wordcontainer.R;
 import com.mike.word.container.wordcontainer.listeners.OnWordClickListener;
 import com.mike.word.container.wordcontainer.models.Word;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -76,10 +75,5 @@ public class WordSearchAdapter extends RecyclerView.Adapter<WordSearchAdapter.Vi
 
         holder.wordView.setText(word);
         holder.bind(wordObj, listener);
-    }
-
-    public void updateWordList(List<Word> wordList) {
-        this.wordList = wordList;
-        notifyDataSetChanged();
     }
 }

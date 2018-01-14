@@ -80,8 +80,6 @@ public final class WordJsonUtilities {
 
                             // Use optJSONArray because there might not be any examples
                             JSONArray examplesArray = definitions.optJSONArray(EXAMPLES);
-                            List<String> tempExampleList = new ArrayList<>();
-
                             if (examplesArray != null) {
                                 for (int m = 0; m < examplesArray.length(); m++) {
                                     JSONObject examples = examplesArray.getJSONObject(m);

@@ -10,7 +10,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,8 +27,6 @@ import com.mike.word.container.wordcontainer.utilities.WordJsonUtilities;
 import com.mike.word.container.wordcontainer.widget.WordWidget;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -47,14 +44,11 @@ public class WordDetailsActivity extends AppCompatActivity {
     private String selectedWord;
     private String wordDefinition;
     private String wordExample;
-//    private String wordRegion;
     private boolean isFavorite = false;
     private Toast toast;
     private Word favoriteWord;
     private MenuItem menuItem;
     private boolean menuVisibility = true;
-
-    private final int FIRST_ELEMENT = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
