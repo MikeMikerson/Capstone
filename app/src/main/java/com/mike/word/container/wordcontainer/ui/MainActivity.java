@@ -223,26 +223,22 @@ public class MainActivity extends AppCompatActivity
     private List<Word> convertCursorToMovie(Cursor cursor) {
         List<Word> wordList = new ArrayList<>();
 
-        try {
-            cursor.moveToPosition(-1);
-            while (cursor.moveToNext()) {
-                int cursorWordId = cursor.getColumnIndex(WordEntry.COLUMN_WORD_ID);
-                int cursorWord = cursor.getColumnIndex(WordEntry.COLUMN_WORD);
-                int cursorDefinition = cursor.getColumnIndex(WordEntry.COLUMN_DEFINITION);
-                int cursorExample = cursor.getColumnIndex(WordEntry.COLUMN_EXAMPLE_LIST);
+        cursor.moveToPosition(-1);
+        while (cursor.moveToNext()) {
+            int cursorWordId = cursor.getColumnIndex(WordEntry.COLUMN_WORD_ID);
+            int cursorWord = cursor.getColumnIndex(WordEntry.COLUMN_WORD);
+            int cursorDefinition = cursor.getColumnIndex(WordEntry.COLUMN_DEFINITION);
+            int cursorExample = cursor.getColumnIndex(WordEntry.COLUMN_EXAMPLE_LIST);
 
-                String wordId = cursor.getString(cursorWordId);
-                String word = cursor.getString(cursorWord);
-                String definition = cursor.getString(cursorDefinition);
-                String example = cursor.getString(cursorExample);
+            String wordId = cursor.getString(cursorWordId);
+            String word = cursor.getString(cursorWord);
+            String definition = cursor.getString(cursorDefinition);
+            String example = cursor.getString(cursorExample);
 
-                // TODO: Add example
-                wordList.add(new Word(wordId, word, definition, example));
-            }
-        } finally {
-            cursor.close();
+            // TODO: Add example
+            wordList.add(new Word(wordId, word, definition, example));
         }
-
+        
         return wordList;
     }
 }
