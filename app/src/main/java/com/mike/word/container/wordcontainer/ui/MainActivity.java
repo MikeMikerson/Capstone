@@ -90,7 +90,13 @@ public class MainActivity extends AppCompatActivity
 
     private void executeAsyncTask(String userWord) {
         WordAsyncTask task = new WordAsyncTask();
-        task.execute(userWord);
+        if (NetworkUtilities.hasConnection(this)) {
+            task.execute(userWord);
+        } else {
+            Toast.makeText(this,
+                    getString(R.string.no_internet),
+                    Toast.LENGTH_SHORT).show();
+        }
     }
 
     private String setEditTextListener() {

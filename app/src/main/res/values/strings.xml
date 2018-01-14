@@ -43,4 +43,7 @@
     <!--Content descriptions-->
     <string name="favorites_button">Display favorites</string>
     <string name="add_to_favorites_fab">Add to favorites</string>
+
+    <!--Internet-->
+    <string name="no_internet">Check your internet connection and try again please</string>
 </resources>

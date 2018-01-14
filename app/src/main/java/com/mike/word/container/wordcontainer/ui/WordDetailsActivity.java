@@ -182,7 +182,14 @@ public class WordDetailsActivity extends AppCompatActivity {
                 saveWordAsFavorite(word);
             }
         });
-        task.execute(wordId);
+
+        if (NetworkUtilities.hasConnection(this)) {
+            task.execute(wordId);
+        } else {
+            Toast.makeText(this,
+                    getString(R.string.no_internet),
+                    Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void displayFavorite() {
