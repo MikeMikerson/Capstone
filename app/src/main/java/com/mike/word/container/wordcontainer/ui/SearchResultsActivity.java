@@ -107,15 +107,15 @@ public class SearchResultsActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                supportFinishAfterTransition();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//            case android.R.id.home:
+//                supportFinishAfterTransition();
+//                return true;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 
     //    ArrayList<Word> arrayWordList = new ArrayList<>();
 //        arrayWordList.addAll(convertCursorToMovie(data));

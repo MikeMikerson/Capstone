@@ -78,6 +78,7 @@ public class MainActivity extends AppCompatActivity
     protected void onResume() {
         super.onResume();
 
+        setEditTextListener();
         trackScreenName();
     }
 
@@ -103,7 +104,9 @@ public class MainActivity extends AppCompatActivity
         searchWordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                if (id == EditorInfo.IME_NULL && keyEvent.getAction() == KeyEvent.ACTION_DOWN) {
+                if (id == EditorInfo.IME_NULL && keyEvent.getAction() == KeyEvent.ACTION_DOWN ||
+                        id == EditorInfo.IME_ACTION_DONE ||
+                        id == EditorInfo.IME_ACTION_SEARCH) {
                     searchWord = textView.getText().toString();
                     executeAsyncTask(searchWord);
                 }
