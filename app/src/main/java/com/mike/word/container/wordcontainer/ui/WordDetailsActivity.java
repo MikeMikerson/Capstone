@@ -83,6 +83,10 @@ public class WordDetailsActivity extends AppCompatActivity {
         } else if (savedInstanceState == null) {
             displayFavorite();
         }
+
+        if (isFavorite) {
+            fabView.setVisibility(View.GONE);
+        }
     }
 
     @Override

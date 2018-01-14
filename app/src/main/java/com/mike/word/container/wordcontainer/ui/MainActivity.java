@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity
         ButterKnife.bind(this);
 
         // Uncomment the following line to delete DB if something goes wrong
-        deleteDatabase();
+//        deleteDatabase();
 
         if (savedInstanceState != null) {
             searchWord = savedInstanceState.getString(ConstantUtilities.EDIT_SEARCH_WORD);
